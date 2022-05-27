@@ -46,8 +46,6 @@ class TestMutableHashMapMethods(TestMutableHashMap):
     def test_key_num(self):
         self.assertEqual(self.hashMap.key_number(), 0)
 
-
-
     # 5. is_member
     def test_is_member(self):
         list_a = [0, 1, 2, 3, 4, 11]
@@ -101,24 +99,23 @@ class TestMutableHashMapMethods(TestMutableHashMap):
         res = self.hashMap.reduce(reduceSum, 0)
         self.assertEqual(res, 21)
 
-    ## The property - based tests
+    # The property - based tests
 
     @given(st.lists(st.integers(5)))
     def test_from_list_to_list_equality(self, a):
-        hash = HashMap()
-        hash.from_list(a)
-        b =hash.to_list()
-        a=set(a)
-        b=set(b)
+        hash1 = HashMap()
+        hash1.from_list(a)
+        b = hash1.to_list()
+        a = set(a)
+        b = set(b)
         self.assertEqual(a, b)
-
 
     @given(st.lists(st.integers()))
     def test_python_len_and_list_size_equality(self, a):
         a = list(set(a))
-        hash = HashMap()
-        hash.from_list(a)
-        self.assertEqual(hash.key_number(), len(a))
+        hash1 = HashMap()
+        hash1.from_list(a)
+        self.assertEqual(hash1.key_number(), len(a))
 
     # 10.monoid_add
     def test_monoid_add(self):
@@ -148,7 +145,6 @@ class TestMutableHashMapMethods(TestMutableHashMap):
         self.assertEqual(hash1.to_list(), tmp)
         i = iter(HashMap())
         self.assertRaises(StopIteration, lambda: next(i))
-
 
 
 if __name__ == "__main__":

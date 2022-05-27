@@ -8,7 +8,6 @@ class HashMap(object):
         for i in range(size):
             self.data.append([])
 
-
     # 1. add
     def add(self, key):
         if not type(key) == int:
@@ -53,6 +52,7 @@ class HashMap(object):
             return False
         for i in list_A:
             self.add(i)
+
     def to_list(self):
         list_A = []
         for i in range(self.len):
@@ -117,4 +117,3 @@ class HashMap(object):
                 raise StopIteration
         else:
             raise StopIteration
-
