@@ -2,8 +2,11 @@
 
 ## Project structure
 
-- `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and `size` and `key_number` and `is_member` and
-                  `from_list` and `to_list` and `filter` and `map` and `reduce` and `monoid_add` and `iteration` features.
+- `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and
+   `size` and `key_number` and `is_member` and
+   `from_list` and `to_list` and `filter` and
+   `map` and `reduce` and `monoid_add` and `iteration` features.
+   
 - `test_mutable.py` -- unit and PBT tests for `mutable`.
 
 ## Features
