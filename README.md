@@ -1,11 +1,9 @@
-GROUP- I can do it - lab 1 - variant 4
-
-Set based on hash-map (collision resolution: separate chaining)
+GROUP- I can do it - lab 1 - variant 4  Set based on hash-map (collision resolution: separate chaining)
 
 ## Project structure
 
 - `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and 'size' and 'key_number' and 'is_member' and
-- 'from_list' and 'to_list' and 'filter' and 'map' and 'reduce' and 'monoid_add' and 'iteration' features.
+                  'from_list' and 'to_list' and 'filter' and 'map' and 'reduce' and 'monoid_add' and 'iteration' features.
 - `test_mutable.py` -- unit and PBT tests for `mutable`.
 
 ## Features
@@ -21,7 +19,7 @@ Set based on hash-map (collision resolution: separate chaining)
 
 ## Changelog
 
--27.05.2022 - 1
+-27.05.2022 - 2
         The final commit. 
 -14.04.2022 - 1
         Update README. 
