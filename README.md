@@ -2,15 +2,15 @@ GROUP- I can do it - lab 1 - variant 4  Set based on hash-map (collision resolut
 
 ## Project structure
 
-- `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and 'size' and 'key_number' and 'is_member' and
-                  'from_list' and 'to_list' and 'filter' and 'map' and 'reduce' and 'monoid_add' and 'iteration' features.
+- `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and `size` and `key_number` and `is_member` and
+                  `from_list` and `to_list` and `filter` and `map` and `reduce` and `monoid_add` and `iteration` features.
 - `test_mutable.py` -- unit and PBT tests for `mutable`.
 
 ## Features
 
 - PBT: `test_from_list_to_list_equality` 
-- and 'test_python_len_and_list_size_equality'
-- and 'test_monoid_add' and 'test_iter'
+- and  `test_python_len_and_list_size_equality`
+- and `test_monoid_add` and `test_iter`
 
 ## Contribution
 
