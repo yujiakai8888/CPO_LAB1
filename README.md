@@ -5,13 +5,14 @@ Set based on hash-map (collision resolution: separate chaining)
 ## Project structure
 
 - `mutable.py` -- implementation of `HashMap` class with `add` and `remove` and 'size' and 'key_number' and 'is_member' and
--  ' from_list' and 'to_list' and 'filter' and 'map' and 'reduce' and 'monoid_add' and 'iteration' features.
-   Stateless.
+- 'from_list' and 'to_list' and 'filter' and 'map' and 'reduce' and 'monoid_add' and 'iteration' features.
 - `test_mutable.py` -- unit and PBT tests for `mutable`.
 
 ## Features
 
-- PBT: `test_from_list_to_list_equality` and 'test_python_len_and_list_size_equality' and 'test_monoid_add' and 'test_iter'
+- PBT: `test_from_list_to_list_equality` 
+- and 'test_python_len_and_list_size_equality'
+- and 'test_monoid_add' and 'test_iter'
 
 ## Contribution
 
