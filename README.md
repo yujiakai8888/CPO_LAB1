@@ -8,7 +8,7 @@
 
 ## Features
 
-- PBT: `test_from_list_to_list_equality` 
+- PBT: `test_from_list_to_list_equality`
 - and  `test_python_len_and_list_size_equality`
 - and `test_monoid_add` and `test_iter`
 
@@ -20,9 +20,9 @@
 ## Changelog
 
 -27.05.2022 - 2
-        The final commit. 
+        The final commit.
 -14.04.2022 - 1
-        Update README. 
+        Update README.
 -14.04.2022 - 0
         Initial
 
