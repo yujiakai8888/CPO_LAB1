@@ -4,160 +4,152 @@ import hypothesis.strategies as st
 from mutable import *
 
 
-class TestHashmapMethods(unittest.TestCase):
+class TestMutableHashMap(unittest.TestCase):
+    def setUp(self):
+        self.hashMap = HashMap()
 
+
+class TestMutableHashMapMethods(TestMutableHashMap):
     def test_init(self):
-        hashmap = HashMap()
-        self.assertEqual(hashmap.length, 7)
-
-    def test_hash(self):
-        hashmap = HashMap()
-        hash_value = hashmap.hash(47)
-        self.assertEqual(hash_value, 5)
+        self.assertEqual(self.hashMap.len, 5)
+        self.assertIsInstance(self.hashMap.data, list)
+        self.assertEqual(self.hashMap.data[0], [])
+        self.assertEqual(self.hashMap.data[1], [])
+        self.assertEqual(self.hashMap.data[2], [])
+        self.assertEqual(self.hashMap.data[3], [])
+        self.assertEqual(self.hashMap.data[4], [])
 
     # 1. add
     def test_add(self):
-        hashmap = HashMap()
-        self.assertEqual(hashmap.hashmap_to_list(), [])
-        hashmap.add(36, 240)
-        self.assertEqual(hashmap.get(36), 240)
-
+        for i in range(5):
+            self.hashMap.add(i)
+        self.assertEqual(self.hashMap.data[0], [0])
+        self.assertEqual(self.hashMap.data[1], [1])
+        self.assertEqual(self.hashMap.data[2], [2])
+        self.assertEqual(self.hashMap.data[3], [3])
+        self.assertEqual(self.hashMap.data[4], [4])
+        self.assertEqual(self.hashMap.add("String"), False)
 
     # 2. remove
     def test_remove(self):
-        hashmap = HashMap()
-        dict1 = {1: 1, 3: 3, 5: 5}
-        hashmap.hashmap_from_dict(dict1)
-        # hashmap.add(1, 2)
-        # self.assertEqual(hashmap.get(1), 2)
+        self.hashMap.add(0)
+        self.assertEqual(self.hashMap.data[0], [0])
+        self.hashMap.remove(0)
+        self.assertEqual(self.hashMap.data[0], [])
+        self.assertEqual(self.hashMap.remove("String"), False)
 
-        hashmap.remove(1)
-        dict2 = {3: 3, 5: 5}
-        self.assertEqual(hashmap.hashmap_to_dict(), dict2)
-        # with pytest.raises(Exception):
-        #     hashmap.remove(6)
+    # 3. size
+    def test_size(self):
+        self.assertEqual(self.hashMap.size(), 5)
 
-    def test_get(self):
-        hashmap = HashMap()
-        hashmap.add(1, 2)
-        self.assertEqual(hashmap.get(1), 2)
+    # 4. key_number
+    def test_key_num(self):
+        self.assertEqual(self.hashMap.key_number(), 0)
 
-    # 3. get_size
-    def test_get_size(self):
-        hashmap = HashMap()
-        self.assertEqual(hashmap.get_size(), 0)
-        dict = {1: 1, 2: 2, 3: 3}
-        hashmap.hashmap_from_dict(dict)
-        self.assertEqual(hashmap.get_size(), 3)
-        hashmap.add(2, 10)
-        self.assertEqual(hashmap.get_size(), 3)
 
-    # 4. conversion
-    def test_hashmap_from_dict(self):
-        hashmap = HashMap()
-        dict = {1: 1, 2: 2, 3: 3}
-        hashmap.hashmap_from_dict(dict)
-        self.assertEqual(hashmap.get_size(), 3)
-        dict1 = {5: 10, 22: 4, 7: 55}
-        hashmap.hashmap_from_dict(dict1)
-        self.assertEqual(hashmap.get_size(), 6)
 
-    # 4. conversion
-    def test_hashmap_from_list(self):
-        hashmap = HashMap()
-        test_data = [1, 2, 3, 4, 5]
-        hashmap.hashmap_from_list(test_data)
-        self.assertEqual(hashmap.get_size(), 5)
+    # 5. is_member
+    def test_is_member(self):
+        list_a = [0, 1, 2, 3, 4, 11]
+        self.hashMap.from_list(list_a)
+        self.assertEqual(self.hashMap.is_member(11), True)
+        self.assertEqual(self.hashMap.is_member(9), False)
 
-    # 4. conversion
-    def test_hashmap_to_dict(self):
-        hashmap = HashMap()
-        hashmap.add(1, 2)
-        hashmap.add(2, 3)
-        hashmap.add(4, 5)
-        self.assertEqual(hashmap.hashmap_to_dict(), {1: 2, 2: 3, 4: 5})
+    # 6. conversion
+    def test_from_list(self):
+        list_a = [0, 1, 2, 3, 4, 11]
+        self.hashMap.from_list(list_a)
+        self.assertEqual(self.hashMap.data[0], [0])
+        self.assertEqual(self.hashMap.data[1], [1, 11])
+        self.assertEqual(self.hashMap.data[2], [2])
+        self.assertEqual(self.hashMap.data[3], [3])
+        self.assertEqual(self.hashMap.data[4], [4])
 
-    # 4. conversion
-    def test_hashmap_to_list(self):
-        hashmap = HashMap()
-        dict = {1: 2, 2: 3, 3: 4, 7: 9}
-        hashmap.hashmap_from_dict(dict)
-        self.assertEqual(hashmap.hashmap_to_list(), [9, 2, 3, 4])
+    # 7. filter
+    def test_filter(self):
+        list_a = [0, 1, 2, 3, 4, 11]
+        self.hashMap.from_list(list_a)
 
-    # 5. find: return the even value list
-    def test_find_even(self):
-        hashmap = HashMap()
-        hashmap.hashmap_from_list([75.51, 2, 60.0, 7.0])
-        self.assertEqual(hashmap.find_even(), [2, 60.0])
+        def filterOdd(value):
+            if value % 2 == 0:
+                return True
+            else:
+                return False
 
-    # 6. filter: return the values' list except even value
-    def test_filter_even(self):
-        hashmap = HashMap()
-        hashmap.hashmap_from_list([75.51, 2, 4.0, 7.0])
-        self.assertEqual(hashmap.filter_even(), [75.51, 7.0])
+        res = self.hashMap.filter(filterOdd)
+        self.assertEqual(res, [0, 2, 4])
 
-    # 7.map(func): test square
+    # 8.map(func)
     def test_map(self):
-        dict1 = {1: 5, 4: 10}
-        hashmap = HashMap()
-        hashmap.hashmap_from_dict(dict1)
-        self.assertEqual(hashmap.map(lambda x: x * x), [25, 100])
+        list_a = [0, 1, 2, 3, 4, 11]
+        self.hashMap.from_list(list_a)
 
-    # 8.reduce:test multiplicative
+        def mapPlusOne(value):
+            return value + 1
+
+        res = self.hashMap.map(mapPlusOne)
+        self.assertEqual(res, [1, 2, 12, 3, 4, 5])
+
+    # 9.reduce
     def test_reduce(self):
-        hashmap = HashMap()
-        self.assertEqual(hashmap.reduce(lambda a, b: a * b, 1), 1)
-        dict1 = {2: 10, 4: 18}
-        hashmap.hashmap_from_dict(dict1)
-        self.assertEqual(hashmap.reduce(lambda a, b: a * b, 1), 180)
+        list_a = [0, 1, 2, 3, 4, 11]
+        self.hashMap.from_list(list_a)
 
-    # 9.iteration
-    def test_iter(self):
-        x = {1, 2, 3, 4}
-        hashmap = HashMap()
-        hashmap.hashmap_from_list(x)
-        temp = {}
-        for e in hashmap:
-            temp[e.key] = e.value
-        self.assertEqual(hashmap.hashmap_to_dict(), temp)
-        i = iter(hashmap)
-        self.assertEqual(next(i).value, 1)
+        def reduceSum(accumulator, curr):
+            return accumulator + curr
 
-    # Add property-based tests for from_list and to_list, all monoid properties (Associativity, Identity element)
-    @given(x=st.lists(st.integers()), y=st.lists(st.integers()), z=st.lists(st.integers()))
-    def test_monoid_associativity(self, x, y, z):
-        hashmap = HashMap()
-        hash_x = HashMap()
-        hash_y = HashMap()
-        hash_z = HashMap()
+        res = self.hashMap.reduce(reduceSum, 0)
+        self.assertEqual(res, 21)
 
-        hash_x.hashmap_from_list(x)
-        hash_y.hashmap_from_list(y)
-        hash_z.hashmap_from_list(z)
+    ## The property - based tests
 
-        xy = hashmap.mconcat(hash_x, hash_y)
-        xy_z = hashmap.mconcat(xy, hash_z)
-        yz = hashmap.mconcat(hash_y, hash_z)
-        yz_x = hashmap.mconcat(hash_x, yz)
+    @given(st.lists(st.integers(5)))
+    def test_from_list_to_list_equality(self, a):
+        hash = HashMap()
+        hash.from_list(a)
+        b =hash.to_list()
+        a=set(a)
+        b=set(b)
+        self.assertEqual(a, b)
 
-        self.assertEqual(xy_z, yz_x)
 
     @given(st.lists(st.integers()))
-    def test_monoid_identity(self, a):
+    def test_python_len_and_list_size_equality(self, a):
+        a = list(set(a))
+        hash = HashMap()
+        hash.from_list(a)
+        self.assertEqual(hash.key_number(), len(a))
+
+    # 10.monoid_add
+    def test_monoid_add(self):
         hash1 = HashMap()
         hash2 = HashMap()
-        hash1.hashmap_from_list(a)
-        # a+b = b+a
-        self.assertEqual(hash1.mconcat(hash2.mempty(), hash1), hash1)
-        self.assertEqual(hash1.mconcat(hash1, hash2.mempty()), hash1)
+        list_a = [0, 1, 2, 3, 4, 11]
+        list_b = [5, 6, 7]
+        hash1.from_list(list_a)
+        hash2.from_list(list_b)
+        tmp1 = hash1
+        tmp2 = hash2
+        # list1 = hash1 add hash2
+        list1 = tmp1.monoid_add(hash2).to_list()
+        # list2 = hash2 add hash1
+        list2 = tmp2.monoid_add(hash1).to_list()
+        self.assertEqual(list1, list2)
 
-    @given(a=st.lists(st.integers()))
-    def test_hashmap_from_list_to_list_equality(self, a):
-        hashmap = HashMap()
-        hashmap.hashmap_from_list(a)
-        b = hashmap.hashmap_to_list()
-        self.assertEqual(len(b), len(a))
+    # 11.iteration and __next__
+    def test_iter(self):
+        x = [1, 2, 3]
+        hash1 = HashMap()
+        hash1.from_list(x)
+        tmp = []
+        for e in hash1:
+            tmp.append(e)
+        self.assertEqual(x, tmp)
+        self.assertEqual(hash1.to_list(), tmp)
+        i = iter(HashMap())
+        self.assertRaises(StopIteration, lambda: next(i))
 
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
