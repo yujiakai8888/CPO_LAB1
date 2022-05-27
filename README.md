@@ -1,4 +1,4 @@
-GROUP- I can do it - lab 1 - variant 4  Set based on hash-map (collision resolution: separate chaining)
+## GROUP- I can do it - lab 1 - variant 4  Set based on hash-map (collision resolution: separate chaining)
 
 ## Project structure
 
