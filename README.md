@@ -6,7 +6,7 @@
    `size` and `key_number` and `is_member` and
    `from_list` and `to_list` and `filter` and
    `map` and `reduce` and `monoid_add` and `iteration` features.
-   
+
 - `test_mutable.py` -- unit and PBT tests for `mutable`.
 
 ## Features
@@ -31,7 +31,7 @@
 
 ## Design notes
 
--   In this lab work, We have completed some basic operations on the dictionary structure.
-    These operations about: add, remove,size,key_number,is_member, to_list,from_list,filter,map,reduce,__iter__,__next__ and monoid_add .
-    Our code has been committed into the github [https://github.com/yujiakai8888/gitrespo](https://github.com/yujiakai8888/CPO_LAB1/)
+-In this lab work, We have completed some basic operations on the dictionary structure.
+ These operations about: add, remove,size,key_number,is_member, to_list,from_list,filter,map,reduce,__iter__,__next__ and monoid_add .
+ Our code has been committed into the github [https://github.com/yujiakai8888/gitrespo](https://github.com/yujiakai8888/CPO_LAB1/)
 
