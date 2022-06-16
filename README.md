@@ -1,4 +1,5 @@
-## GROUP- I can do it - lab 1 - variant 4  Set based on hash-map (collision resolution: separate chaining)
+# GROUP- I can do it - lab 1 - variant 4  Set based on hash-map
+(collision resolution: separate chaining)
 
 ## Project structure
 
@@ -32,6 +33,7 @@
 ## Design notes
 
 -In this lab work, We have completed some basic operations on the dictionary structure.
- These operations about: add, remove,size,key_number,is_member, to_list,from_list,filter,map,reduce,__iter__,__next__ and monoid_add .
+ These operations about: add, remove,size,key_number,is_member, to_list,from_list,filter,map,reduce,
+ __iter__,__next__ and monoid_add .
  Our code has been committed into the github [https://github.com/yujiakai8888/gitrespo](https://github.com/yujiakai8888/CPO_LAB1/)
 
