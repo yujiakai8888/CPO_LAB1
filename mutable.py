@@ -10,33 +10,21 @@ class HashMap(object):
 
     # 1. add
     def add(self, key):
-        new = HashMap()
-        new.data = self.data
-        new.len = self.len
-        new.keynumber = self.keynumber
-        new.__curr__ = self.__curr__
-
-        if new.is_member(key):
-            return new
-        index = key % new.len
-        new.data[index].append(key)
-        new.keynumber += 1
-        return new
+        if self.is_member(key):
+            return self
+        index = key % self.len
+        self.data[index].append(key)
+        self.keynumber += 1
+        return self
 
     # 2. remove
     def remove(self, key):
-        new = HashMap()
-        new.data = self.data
-        new.len = self.len
-        new.keynumber = self.keynumber
-        new.__curr__ = self.__curr__
-
-        index = key % new.len
-        new.keynumber -= 1
-        for value in new.data[index]:
+        index = key % self.len
+        self.keynumber -= 1
+        for value in self.data[index]:
             if value == key:
-                new.data[index].remove(value)
-        return new
+                self.data[index].remove(value)
+        return self
 
     # 3. size
     def size(self):
@@ -56,15 +44,9 @@ class HashMap(object):
 
     # 6. conversion
     def from_list(self, list_A):
-        new = HashMap()
-        new.data = self.data
-        new.len = self.len
-        new.keynumber = self.keynumber
-        new.__curr__ = self.__curr__
-
         for i in list_A:
-            new = new.add(i)
-        return new
+            self.add(i)
+        return self
 
     def to_list(self):
         list_A = []
@@ -103,18 +85,12 @@ class HashMap(object):
         if another_hash.keynumber == 0:
             return self
 
-        new = HashMap()
-        new.data = self.data
-        new.len = self.len
-        new.keynumber = self.keynumber
-        new.__curr__ = self.__curr__
-
         for i in range(another_hash.len):
             for v in another_hash.data[i]:
-                if not new.is_member(v):
-                    new = new.add(v)
-        new.keynumber += another_hash.keynumber
-        return new
+                if not self.is_member(v):
+                    self.add(v)
+        self.keynumber += another_hash.keynumber
+        return self
 
     # 11.iteration and __next__
     def __iter__(self):
