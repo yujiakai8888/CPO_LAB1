@@ -10,25 +10,33 @@ class HashMap(object):
 
     # 1. add
     def add(self, key):
-        if not type(key) == int:
-            return False
-        if self.is_member(key):
-            return True
-        index = key % self.len
-        self.data[index].append(key)
-        self.keynumber += 1
-        return True
+        new = HashMap()
+        new.data = self.data
+        new.len = self.len
+        new.keynumber = self.keynumber
+        new.__curr__ = self.__curr__
+
+        if new.is_member(key):
+            return new
+        index = key % new.len
+        new.data[index].append(key)
+        new.keynumber += 1
+        return new
 
     # 2. remove
     def remove(self, key):
-        if not self.is_member(key):
-            return False
-        index = key % self.len
-        self.keynumber -= 1
-        for value in self.data[index]:
+        new = HashMap()
+        new.data = self.data
+        new.len = self.len
+        new.keynumber = self.keynumber
+        new.__curr__ = self.__curr__
+
+        index = key % new.len
+        new.keynumber -= 1
+        for value in new.data[index]:
             if value == key:
-                self.data[index].remove(value)
-        return True
+                new.data[index].remove(value)
+        return new
 
     # 3. size
     def size(self):
@@ -48,10 +56,15 @@ class HashMap(object):
 
     # 6. conversion
     def from_list(self, list_A):
-        if not type(list_A) == list:
-            return False
+        new = HashMap()
+        new.data = self.data
+        new.len = self.len
+        new.keynumber = self.keynumber
+        new.__curr__ = self.__curr__
+
         for i in list_A:
-            self.add(i)
+            new = new.add(i)
+        return new
 
     def to_list(self):
         list_A = []
@@ -69,7 +82,7 @@ class HashMap(object):
                     res.append(v)
         return res
 
-    # 8.map(func)
+    # 8.map(func): return a list
     def map(self, func):
         res = []
         for i in range(self.len):
@@ -77,7 +90,7 @@ class HashMap(object):
                 res.append(func(v))
         return res
 
-    # 9.reduce
+    # 9.reduce: return accumulator
     def reduce(self, func, initial):
         accumulator = initial
         for i in range(self.len):
@@ -89,12 +102,19 @@ class HashMap(object):
     def monoid_add(self, another_hash):
         if another_hash.keynumber == 0:
             return self
+
+        new = HashMap()
+        new.data = self.data
+        new.len = self.len
+        new.keynumber = self.keynumber
+        new.__curr__ = self.__curr__
+
         for i in range(another_hash.len):
             for v in another_hash.data[i]:
-                if not self.is_member(v):
-                    self.add(v)
-        self.keynumber += another_hash.keynumber
-        return self
+                if not new.is_member(v):
+                    new = new.add(v)
+        new.keynumber += another_hash.keynumber
+        return new
 
     # 11.iteration and __next__
     def __iter__(self):

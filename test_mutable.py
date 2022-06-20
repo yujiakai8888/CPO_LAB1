@@ -21,22 +21,22 @@ class TestMutableHashMapMethods(TestMutableHashMap):
 
     # 1. add
     def test_add(self):
+        new = HashMap()
         for i in range(5):
-            self.hashMap.add(i)
-        self.assertEqual(self.hashMap.data[0], [0])
-        self.assertEqual(self.hashMap.data[1], [1])
-        self.assertEqual(self.hashMap.data[2], [2])
-        self.assertEqual(self.hashMap.data[3], [3])
-        self.assertEqual(self.hashMap.data[4], [4])
-        self.assertEqual(self.hashMap.add("String"), False)
+            new = new.add(i)
+        self.assertEqual(new.data[0], [0])
+        self.assertEqual(new.data[1], [1])
+        self.assertEqual(new.data[2], [2])
+        self.assertEqual(new.data[3], [3])
+        self.assertEqual(new.data[4], [4])
 
     # 2. remove
     def test_remove(self):
-        self.hashMap.add(0)
-        self.assertEqual(self.hashMap.data[0], [0])
-        self.hashMap.remove(0)
-        self.assertEqual(self.hashMap.data[0], [])
-        self.assertEqual(self.hashMap.remove("String"), False)
+        new = HashMap()
+        new = new.add(0)
+        self.assertEqual(new.data[0], [0])
+        new = new.remove(0)
+        self.assertEqual(new.data[0], [])
 
     # 3. size
     def test_size(self):
@@ -48,10 +48,11 @@ class TestMutableHashMapMethods(TestMutableHashMap):
 
     # 5. is_member
     def test_is_member(self):
+        new = HashMap()
         list_a = [0, 1, 2, 3, 4, 11]
-        self.hashMap.from_list(list_a)
-        self.assertEqual(self.hashMap.is_member(11), True)
-        self.assertEqual(self.hashMap.is_member(9), False)
+        new = new.from_list(list_a)
+        self.assertEqual(new.is_member(11), True)
+        self.assertEqual(new.is_member(9), False)
 
     # 6. conversion
     def test_from_list(self):
@@ -65,8 +66,9 @@ class TestMutableHashMapMethods(TestMutableHashMap):
 
     # 7. filter
     def test_filter(self):
+        new = HashMap()
         list_a = [0, 1, 2, 3, 4, 11]
-        self.hashMap.from_list(list_a)
+        new.from_list(list_a)
 
         def filterOdd(value):
             if value % 2 == 0:
@@ -74,29 +76,31 @@ class TestMutableHashMapMethods(TestMutableHashMap):
             else:
                 return False
 
-        res = self.hashMap.filter(filterOdd)
+        res = new.filter(filterOdd)
         self.assertEqual(res, [0, 2, 4])
 
     # 8.map(func)
     def test_map(self):
+        new = HashMap()
         list_a = [0, 1, 2, 3, 4, 11]
-        self.hashMap.from_list(list_a)
+        new.from_list(list_a)
 
         def mapPlusOne(value):
             return value + 1
 
-        res = self.hashMap.map(mapPlusOne)
+        res = new.map(mapPlusOne)
         self.assertEqual(res, [1, 2, 12, 3, 4, 5])
 
     # 9.reduce
     def test_reduce(self):
+        new = HashMap()
         list_a = [0, 1, 2, 3, 4, 11]
-        self.hashMap.from_list(list_a)
+        new.from_list(list_a)
 
         def reduceSum(accumulator, curr):
             return accumulator + curr
 
-        res = self.hashMap.reduce(reduceSum, 0)
+        res = new.reduce(reduceSum, 0)
         self.assertEqual(res, 21)
 
     # The property - based tests
@@ -104,7 +108,7 @@ class TestMutableHashMapMethods(TestMutableHashMap):
     @given(st.lists(st.integers(5)))
     def test_from_list_to_list_equality(self, a):
         hash1 = HashMap()
-        hash1.from_list(a)
+        hash1 = hash1.from_list(a)
         b = hash1.to_list()
         a = set(a)
         b = set(b)
@@ -114,7 +118,7 @@ class TestMutableHashMapMethods(TestMutableHashMap):
     def test_python_len_and_list_size_equality(self, a):
         a = list(set(a))
         hash1 = HashMap()
-        hash1.from_list(a)
+        hash1 = hash1.from_list(a)
         self.assertEqual(hash1.key_number(), len(a))
 
     # 10.monoid_add
@@ -123,8 +127,8 @@ class TestMutableHashMapMethods(TestMutableHashMap):
         hash2 = HashMap()
         list_a = [0, 1, 2, 3, 4, 11]
         list_b = [5, 6, 7]
-        hash1.from_list(list_a)
-        hash2.from_list(list_b)
+        hash1 = hash1.from_list(list_a)
+        hash2 = hash2.from_list(list_b)
         tmp1 = hash1
         tmp2 = hash2
         # list1 = hash1 add hash2
@@ -137,7 +141,7 @@ class TestMutableHashMapMethods(TestMutableHashMap):
     def test_iter(self):
         x = [1, 2, 3]
         hash1 = HashMap()
-        hash1.from_list(x)
+        hash1 = hash1.from_list(x)
         tmp = []
         for e in hash1:
             tmp.append(e)
